@@ -21,6 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
+      <head>
+        <link rel="icon" href="/favicon.png" />
+      </head>
       <html lang="en">
         <body className={`${geistSans.variable} antialiased`}>
           <ConvexClientProvider>{children}</ConvexClientProvider>
