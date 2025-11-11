@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import ConvexClientProvider from "@/components/providers/ConvexClientProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
@@ -27,6 +28,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={`${geistSans.variable} antialiased`}>
           <ConvexClientProvider>{children}</ConvexClientProvider>
+          <Footer />
         </body>
       </html>
     </ClerkProvider>
