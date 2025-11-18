@@ -1,8 +1,10 @@
 "use client";
+import useMounted from "@/hooks/useMounted";
 import { useCodeEditorStore } from "@/store/useCodeEditorStore";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import {
+  LuAlbum,
   LuChevronDown,
   LuCircleOff,
   LuCloud,
@@ -20,6 +22,7 @@ const THEME_ICONS: Record<string, React.ReactNode> = {
   "github-dark": <LuGithub className="size-4" />,
   monokai: <LuLaptop className="size-4" />,
   "solarized-dark": <LuCloud className="size-4" />,
+  dracula: <LuAlbum className="size-4" />,
 };
 
 const ThemeSelector = () => {
@@ -27,7 +30,7 @@ const ThemeSelector = () => {
   const { theme, setTheme } = useCodeEditorStore();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const currentTheme = THEMES.find((t) => t.id === theme);
-  const [mount, setMount] = useState(false);
+  const mounted = useMounted();
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -44,10 +47,8 @@ const ThemeSelector = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  useEffect(() => {
-    setMount(true);
-  }, []);
-  if (!mount) return null;
+
+  if (!mounted) return null;
 
   return (
     <div className="relative" ref={dropdownRef}>

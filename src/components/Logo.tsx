@@ -5,7 +5,7 @@ const Logo = () => {
   return (
     <Link
       href={"/"}
-      className="bg-dark rounded-md flex items-center gap-x-3 px-2 py-2 w-fit cursor-pointer"
+      className="bg-dark rounded-md flex items-center gap-x-3 pr-4 pl-2 py-2 w-fit cursor-pointer"
     >
       <Image
         src="/logo.png"

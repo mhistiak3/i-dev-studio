@@ -1,4 +1,3 @@
-import { Monaco } from "@monaco-editor/react";
 import { Theme } from "../../../types";
 
 type LanguageConfig = Record<
@@ -342,9 +341,10 @@ export const THEMES: Theme[] = [
   { id: "github-dark", label: "GitHub Dark", color: "#0d1117" },
   { id: "monokai", label: "Monokai", color: "#272822" },
   { id: "solarized-dark", label: "Solarized Dark", color: "#002b36" },
+  { id: "dracula", label: "Dracula", color: "#282a36" },
 ];
 
-export const THEME_DEFINITONS = {
+export const THEME_DEFINITIONS = {
   "github-dark": {
     base: "vs-dark",
     inherit: true,
@@ -417,11 +417,37 @@ export const THEME_DEFINITONS = {
       "editor.selectionHighlightBackground": "#073642",
     },
   },
+  dracula: {
+    base: "vs-dark",
+    inherit: true,
+    rules: [
+      { token: "comment", foreground: "6272a4" },
+      { token: "string", foreground: "f1fa8c" },
+      { token: "keyword", foreground: "ff79c6" },
+      { token: "number", foreground: "bd93f9" },
+      { token: "type", foreground: "8be9fd" },
+      { token: "class", foreground: "50fa7b" },
+      { token: "function", foreground: "50fa7b" },
+      { token: "variable", foreground: "f8f8f2" },
+      { token: "operator", foreground: "ff79c6" },
+    ],
+    colors: {
+      "editor.background": "#282a36",
+      "editor.foreground": "#f8f8f2",
+      "editor.lineHighlightBackground": "#44475a",
+      "editorLineNumber.foreground": "#6272a4",
+      "editorIndentGuide.background": "#44475a",
+      "editor.selectionBackground": "#44475a",
+      "editor.inactiveSelectionBackground": "#44475a75",
+      "editorCursor.foreground": "#f8f8f2",
+      "editor.selectionHighlightBackground": "#44475a",
+    },
+  },
 };
 
 // Helper function to define themes in Monaco
-export const defineMonacoThemes = (monaco: Monaco) => {
-  Object.entries(THEME_DEFINITONS).forEach(([themeName, themeData]) => {
+export const defineMonacoThemes = (monaco: any) => {
+  Object.entries(THEME_DEFINITIONS).forEach(([themeName, themeData]) => {
     monaco.editor.defineTheme(themeName, {
       base: themeData.base,
       inherit: themeData.inherit,

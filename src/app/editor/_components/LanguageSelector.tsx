@@ -1,4 +1,5 @@
 "use client";
+import useMounted from "@/hooks/useMounted";
 import { useCodeEditorStore } from "@/store/useCodeEditorStore";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
@@ -10,7 +11,7 @@ const LanguageSelector = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { language, setLanguage } = useCodeEditorStore();
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [mount, setMount] = useState(false);
+  const mounted = useMounted();
 
   const currentLanguage = LANGUAGE_CONFIG[language];
   useEffect(() => {
@@ -29,11 +30,8 @@ const LanguageSelector = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  useEffect(() => {
-    setMount(true);
-  }, []);
-  if (!mount) return null;
 
+  if (!mounted) return null;
   return (
     <div className="relative" ref={dropdownRef}>
       <motion.button
