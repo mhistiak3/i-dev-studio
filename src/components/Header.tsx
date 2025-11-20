@@ -1,3 +1,5 @@
+"use client";
+import HeaderProfile from "@/app/editor/_components/HeaderProfile";
 import Logo from "./Logo";
 
 const Header = () => {
@@ -6,7 +8,8 @@ const Header = () => {
       <div className="container">
         <nav className="flex justify-between items-center">
           <Logo />
-          <button>Register</button>
+
+          <HeaderProfile />
         </nav>
       </div>
     </header>

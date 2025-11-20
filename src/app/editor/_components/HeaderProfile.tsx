@@ -1,6 +1,6 @@
 "use client";
 import { SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-import { BiUser } from "react-icons/bi";
+import { BiEdit, BiUser } from "react-icons/bi";
 
 const HeaderProfile = () => {
   return (
@@ -11,6 +11,11 @@ const HeaderProfile = () => {
             label="Profile"
             href="/profile"
             labelIcon={<BiUser className={"size-4"} />}
+          />
+          <UserButton.Link
+            label="Editor"
+            href="/editor"
+            labelIcon={<BiEdit className={"size-4"} />}
           />
         </UserButton.MenuItems>
       </UserButton>

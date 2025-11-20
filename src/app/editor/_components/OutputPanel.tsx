@@ -61,7 +61,7 @@ const OutputPanel = () => {
       <div className="relative">
         <div
           className="relative bg-dark/50 backdrop-blur-sm border border-border 
-        rounded-xl p-4 h-[600px] overflow-auto font-mono text-sm"
+        rounded-xl p-4 h-[calc(100vh-200px)] overflow-auto font-mono text-sm"
         >
           {isRunning ? (
             <RunningCodeSkeleton />
