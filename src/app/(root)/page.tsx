@@ -1,9 +1,9 @@
-import Header from "@/components/Header";
+import NavigationHeader from "@/components/NavigationHeader";
 
 export default function Home() {
   return (
     <div className="min-h-screen">
-      <Header />
+      <NavigationHeader />
       <div className="container">
         <div className="text-center mt-20">
           <h1 className="text-3xl font-bold mt-8">Welcome to iDevStudio</h1>
