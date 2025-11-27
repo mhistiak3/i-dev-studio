@@ -17,6 +17,11 @@ const HeaderProfile = () => {
             href="/editor"
             labelIcon={<BiEdit className={"size-4"} />}
           />
+          <UserButton.Link
+            label="Snippets"
+            href="/snippets"
+            labelIcon={<BiEdit className={"size-4"} />}
+          />
         </UserButton.MenuItems>
       </UserButton>
 

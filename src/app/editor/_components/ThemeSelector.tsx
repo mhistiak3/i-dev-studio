@@ -66,8 +66,8 @@ const ThemeSelector = () => {
         rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
           aria-hidden="true"
         />
-        <LuPalette className="size-4 text-light/60 group-hover:text-light transition-colors duration-200" />
-        <span className="text-light/60 min-w-20 text-left group-hover:text-light transition-colors duration-200">
+        <LuPalette className="size-4 text-light/60 group-hover:text-light transition-colors duration-200 hidden lg:inline-block" />
+        <span className="text-light/60 min-w-20 text-left group-hover:text-light transition-colors duration-200 hidden lg:inline-block">
           {currentTheme?.label}
         </span>
         {/* indicator */}

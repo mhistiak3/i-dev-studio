@@ -50,7 +50,7 @@ const LanguageSelector = () => {
           aria-hidden="true"
         />
         {/* Language Icon */}
-        <div className="size-6 rounded-md bg-gray-800/50 p-0.5 group-hover:scale-110 transition-transform">
+        <div className="size-4 lg:size-6 rounded-md bg-gray-800/50 p-0.5 group-hover:scale-110 transition-transform">
           <Image
             src={"/images" + currentLanguage.logoPath}
             alt="programming language logo"
@@ -60,11 +60,11 @@ const LanguageSelector = () => {
           />
         </div>
         {/* Language Name */}
-        <span className="text-light/60 min-w-20 text-left group-hover:text-light transition-colors duration-200">
+        <span className="text-light/60 min-w-20 text-left group-hover:text-light transition-colors duration-200 hidden lg:inline-block">
           {currentLanguage?.label}
         </span>
         <LuChevronDown
-          className={`size-4 text-light/60 group-hover:text-light transition-all duration-300
+          className={`lg:size-4 text-light/60 group-hover:text-light transition-all duration-300
           ${isOpen ? "rotate-180" : ""}`}
         />
       </motion.button>

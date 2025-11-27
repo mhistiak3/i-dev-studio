@@ -41,14 +41,16 @@ const RunButton = () => {
         <div className="relative flex items-center gap-2 animate-pulse">
           <LuLoader className="size-4 text-light/70 animate-spin" />
           <div className="absolute size-full inset-0 animate-pulse blur-sm" />
-          <span className="text-sm font-medium text-light/90">
+          <span className="text-sm font-medium text-light/90 hidden md:inline-block">
             Executing...
           </span>
         </div>
       ) : (
         <div className="flex items-center gap-2 cursor-pointer">
           <LuPlay className="size-4 text-light" />
-          <span className="text-sm font-medium text-light">Run Code</span>
+          <span className="text-sm font-medium text-light hidden lg:inline-block">
+            Run Code
+          </span>
         </div>
       )}
     </motion.button>
