@@ -107,10 +107,7 @@ const ThemeSelector = () => {
                 onClick={() => setTheme(t.id)}
               >
                 {/* bg gradient */}
-                <div
-                  className="absolute inset-0 bg-gradient-to-r from-primary/10 to-dark/5 opacity-0 
-              group-hover:opacity-100 transition-opacity"
-                />
+                <div className="absolute inset-0 bg-linear-to-r from-primary/10 to-dark/5 opacity-0 group-hover:opacity-100 transition-opacity" />
 
                 {/* icon */}
                 <div

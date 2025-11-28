@@ -150,3 +150,28 @@ export const getSnippetStarCount = query({
     return starCount.length;
   },
 });
+
+// get snippet by id
+export const getSnippetById = query({
+  args: { snippetId: v.id("snippets") },
+  handler: async (ctx, { snippetId }) => {
+    const snippet = await ctx.db.get(snippetId);
+
+    if (!snippet) throw new ConvexError("Snippet not found");
+    return snippet;
+  },
+});
+
+// get snippets comments
+const getCommentsBySnippet = query({
+  args: { snippetId: v.id("snippets") },
+  handler: async (ctx, args) => {
+    const comments = await ctx.db
+      .query("snippetComments")
+      .withIndex("bySnippetId")
+      .filter((q) => q.eq(q.field("snippetId"), args.snippetId))
+      .order("desc")
+      .collect();
+    return comments;
+  },
+});
