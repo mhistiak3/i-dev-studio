@@ -23,3 +23,7 @@ body {
 header {
   @apply flex items-center justify-between bg-black/80 backdrop-blur-xl p-4 sm:p-6 mb-4 rounded-lg relative z-10;
 }
+
+.btn-primary {
+  @apply px-6 py-2 bg-primary/70 text-white rounded-lg hover:bg-primary transition-colors cursor-pointer;
+}

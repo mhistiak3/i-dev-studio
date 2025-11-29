@@ -26,7 +26,7 @@ const HeaderProfile = () => {
       </UserButton>
 
       <SignedOut>
-        <div className="px-4 py-2 bg-primary/10 rounded-lg mb-6 cursor-pointer">
+        <div className="btn-primary">
           <SignInButton />
         </div>
       </SignedOut>

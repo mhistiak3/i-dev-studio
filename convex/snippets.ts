@@ -163,7 +163,7 @@ export const getSnippetById = query({
 });
 
 // get snippets comments
-const getCommentsBySnippet = query({
+export const getCommentsBySnippetId = query({
   args: { snippetId: v.id("snippets") },
   handler: async (ctx, args) => {
     const comments = await ctx.db
@@ -173,5 +173,52 @@ const getCommentsBySnippet = query({
       .order("desc")
       .collect();
     return comments;
+  },
+});
+
+// add comment to snippet
+export const addComment = mutation({
+  args: {
+    snippetId: v.id("snippets"),
+    content: v.string(),
+  },
+  handler: async (ctx, { snippetId, content }) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new ConvexError("User not authenticated");
+
+    // get user and check user
+    const user = await ctx.db
+      .query("users")
+      .withIndex("byUserId")
+      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .first();
+    if (!user) {
+      throw new ConvexError("User not found");
+    }
+    // insert comment
+    return await ctx.db.insert("snippetComments", {
+      snippetId,
+      content,
+      userId: identity.subject,
+      userName: user.name || "Anonymous",
+    });
+  },
+});
+
+// delete comment
+export const deleteComment = mutation({
+  args: { commentId: v.id("snippetComments") },
+  handler: async (ctx, { commentId }) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new ConvexError("User not authenticated");
+
+    const comment = await ctx.db.get(commentId);
+    if (!comment) throw new ConvexError("Comment not found");
+
+    if (comment.userId !== identity.subject) {
+      throw new ConvexError("Unauthorized to delete this comment");
+    }
+
+    await ctx.db.delete(commentId);
   },
 });

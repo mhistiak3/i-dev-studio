@@ -10,6 +10,7 @@ import { useParams } from "next/navigation";
 import { LuClock, LuCode, LuMessageSquare, LuUser } from "react-icons/lu";
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
+import Comments from "./_components/Comments";
 import SnippetLoadingSkeleton from "./_components/SnippetLoadingSkeleton";
 
 const SnippetDetails = () => {
@@ -18,10 +19,14 @@ const SnippetDetails = () => {
   const snippet = useQuery(api.snippets.getSnippetById, {
     snippetId: id as Id<"snippets">,
   });
+  const comments = useQuery(api.snippets.getCommentsBySnippetId, {
+    snippetId: id as Id<"snippets">,
+  });
 
   if (snippet === undefined) {
     return <SnippetLoadingSkeleton />;
   }
+  console.log(snippet);
 
   return (
     <div className="min-h-screen bg-dark">
@@ -57,7 +62,7 @@ const SnippetDetails = () => {
                       </div>
                       <div className="flex items-center gap-2 text-light/60">
                         <LuMessageSquare className="w-4 h-4" />
-                        {/* <span>{comments?.length} comments</span> */}
+                        <span>{comments?.length} comments</span>
                       </div>
                     </div>
                   </div>
@@ -101,7 +106,7 @@ const SnippetDetails = () => {
               />
             </div>
 
-            {/* <Comments snippetId={snippet._id} /> */}
+            <Comments snippetId={snippet._id} />
           </div>
         </main>
       </div>
