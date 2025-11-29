@@ -1,5 +1,6 @@
 import { LuTrash2, LuUser } from "react-icons/lu";
 import { Id } from "../../../../../convex/_generated/dataModel";
+import CommentContent from "./CommentContent";
 
 interface CommentProps {
   comment: {
@@ -49,9 +50,7 @@ const Comment = ({
             </button>
           )}
         </div>
-
-        {comment.content}
-        {/* <CommentContent content={comment.content} /> */}
+        <CommentContent content={comment.content} />
       </div>
     </div>
   );

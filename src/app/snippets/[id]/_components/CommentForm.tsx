@@ -20,7 +20,21 @@ const CommentForm = ({
     setComment("");
     setIsPreview(false);
   };
-  const handleKeyDown = () => {};
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === "Tab") {
+      event.preventDefault();
+      const target = event.currentTarget;
+      const start = target.selectionStart;
+      const end = target.selectionEnd;
+      const newComment =
+        comment.substring(0, start) + "  " + comment.substring(end);
+      setComment(newComment);
+      // Move the cursor
+      setTimeout(() => {
+        target.selectionStart = target.selectionEnd = start + 2;
+      }, 0);
+    }
+  };
   return (
     <form onSubmit={handleSubmit} className="mb-8">
       <div className="bg-dark rounded-xl border border-border/10 overflow-hidden">

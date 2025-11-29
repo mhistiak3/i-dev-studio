@@ -12,6 +12,7 @@ const CopiedButton = ({ content }: { content: string }) => {
   return (
     content && (
       <button
+        type="button"
         onClick={handleCopy}
         className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs text-light/70 hover:text-light bg-dark 
                rounded-lg ring-1 ring-light/5 hover:ring-light/10 transition-all"
