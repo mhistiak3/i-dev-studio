@@ -27,15 +27,15 @@ export const saveExecution = mutation({
 // get all code executions by user
 export const getUserCodeExecutions = query({
   args: {
-    paginationOption: paginationOptsValidator,
     userId: v.string(),
+    paginationOpts: paginationOptsValidator,
   },
   handler: async (ctx, args) => {
     return await ctx.db
       .query("codeExecutions")
       .withIndex("byUserId")
       .filter((q) => q.eq(q.field("userId"), args.userId))
-      .paginate(args.paginationOption);
+      .paginate(args.paginationOpts);
   },
 });
 

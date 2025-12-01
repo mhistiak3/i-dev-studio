@@ -52,7 +52,7 @@ const SnippetsPage = () => {
   });
 
   return (
-    <div className="min-h-screen bg-dark/20">
+    <div className="min-h-screen bg-body/20">
       <div className="container">
         <NavigationHeader />
         {/* Hero */}

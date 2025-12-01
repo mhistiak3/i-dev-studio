@@ -2,7 +2,7 @@ import NavigationHeader from "@/components/NavigationHeader";
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-body/20">
       <div className="container">
         <NavigationHeader />
         <div className="text-center mt-20">
