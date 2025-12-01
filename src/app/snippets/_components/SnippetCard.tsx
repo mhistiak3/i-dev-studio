@@ -1,4 +1,5 @@
 "use client";
+import DeleteButton from "@/components/DeleteButton";
 import StarButton from "@/components/StarButton";
 import { Snippet } from "@/types";
 import { useUser } from "@clerk/nextjs";
@@ -8,7 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { LuClock, LuTrash2, LuUser } from "react-icons/lu";
+import { LuClock, LuUser } from "react-icons/lu";
 import { api } from "../../../../convex/_generated/api";
 
 const SnippetCard = ({ snippet }: { snippet: Snippet }) => {
@@ -83,23 +84,10 @@ const SnippetCard = ({ snippet }: { snippet: Snippet }) => {
 
                 {user?.id === snippet.userId && (
                   <div className="z-10" onClick={(e) => e.preventDefault()}>
-                    <button
-                      onClick={handleDelete}
-                      disabled={isDeleting}
-                      className={`group flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all duration-200
-                        ${
-                          isDeleting
-                            ? "bg-red-500/20 text-red-400 cursor-not-allowed"
-                            : "bg-light/10 text-light/50 hover:bg-red-500/10 hover:text-red-400"
-                        }
-                    `}
-                    >
-                      {isDeleting ? (
-                        <div className="size-3.5 border-2 border-red-400/30 border-t-red-400 rounded-full animate-spin" />
-                      ) : (
-                        <LuTrash2 className="size-3.5" />
-                      )}
-                    </button>
+                    <DeleteButton
+                      handleDelete={handleDelete}
+                      isDeleting={isDeleting}
+                    />
                   </div>
                 )}
               </div>

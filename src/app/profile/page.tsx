@@ -1,14 +1,11 @@
 "use client";
 import NavigationHeader from "@/components/NavigationHeader";
-import StarButton from "@/components/StarButton";
 import { useUser } from "@clerk/nextjs";
 import { usePaginatedQuery, useQuery } from "convex/react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { FaClock } from "react-icons/fa";
 import {
   LuChevronRight,
   LuCode,
@@ -18,6 +15,7 @@ import {
 } from "react-icons/lu";
 import { api } from "../../../convex/_generated/api";
 import CodeBlock from "../snippets/[id]/_components/CodeBlock";
+import SnippetCard from "../snippets/_components/SnippetCard";
 import ProfileHeader from "./_component/ProfileHeader";
 import ProfileHeaderSkeleton from "./_component/ProfileHeaderSkeleton";
 
@@ -244,62 +242,7 @@ const Profile = () => {
                 {activeTab === "starred" && (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {starredSnippet?.map((snippet) => (
-                      <div key={snippet._id} className="group relative">
-                        <Link href={`/snippets/${snippet._id}`}>
-                          <div
-                            className="bg-dark/20 rounded-xl border border-border/50 hover:border-border 
-                          transition-all duration-300 overflow-hidden h-full group-hover:transform
-                        group-hover:scale-[1.02]"
-                          >
-                            <div className="p-6">
-                              <div className="flex items-center justify-between mb-4">
-                                <div className="flex items-center gap-3">
-                                  <div className="relative">
-                                    <div className="absolute inset-0 bg-linear-to-r from-primary to-primary/80 rounded-lg blur opacity-20 group-hover:opacity-30 transition-opacity" />
-                                    <Image
-                                      src={`/images/${snippet.language}.png`}
-                                      alt={`${snippet.language} logo`}
-                                      className="relative z-10"
-                                      width={40}
-                                      height={40}
-                                    />
-                                  </div>
-                                  <span className="px-3 py-1 bg-primary/10 text-primary rounded-lg text-sm">
-                                    {snippet.language}
-                                  </span>
-                                </div>
-                                <div
-                                  className="absolute top-6 right-6 z-10"
-                                  onClick={(e) => e.preventDefault()}
-                                >
-                                  <StarButton snippetId={snippet._id} />
-                                </div>
-                              </div>
-                              <h2 className="text-xl font-semibold text-light mb-3 line-clamp-1 group-hover:text-primary transition-colors">
-                                {snippet.title}
-                              </h2>
-                              <div className="flex items-center justify-between text-sm text-light/70">
-                                <div className="flex items-center gap-2">
-                                  <FaClock className="w-4 h-4" />
-                                  <span>
-                                    {new Date(
-                                      snippet._creationTime
-                                    ).toLocaleDateString()}
-                                  </span>
-                                </div>
-                                <LuChevronRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
-                              </div>
-                            </div>
-                            <div className="px-6 pb-6">
-                              <div className="bg-body/30 rounded-lg p-4 overflow-hidden">
-                                <pre className="text-sm text-light/90 font-mono line-clamp-3">
-                                  {snippet.code}
-                                </pre>
-                              </div>
-                            </div>
-                          </div>
-                        </Link>
-                      </div>
+                      <SnippetCard snippet={snippet} key={snippet._id} />
                     ))}
 
                     {(!starredSnippet || starredSnippet.length === 0) && (
