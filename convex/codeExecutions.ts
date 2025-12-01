@@ -107,3 +107,22 @@ export const getUserStats = query({
     };
   },
 });
+
+// delete code execution by id
+export const deleteCodeExecutionById = mutation({
+  args: {
+    executionId: v.id("codeExecutions"),
+  },
+  handler: async (ctx, { executionId }) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new ConvexError("User not authenticated");
+
+    const execution = await ctx.db.get(executionId);
+    if (!execution) throw new ConvexError("Code execution not found");
+
+    if (execution.userId !== identity.subject)
+      throw new ConvexError("Unauthorized");
+
+    await ctx.db.delete(executionId);
+  },
+});

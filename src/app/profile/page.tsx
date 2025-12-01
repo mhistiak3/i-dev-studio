@@ -3,7 +3,6 @@ import NavigationHeader from "@/components/NavigationHeader";
 import { useUser } from "@clerk/nextjs";
 import { usePaginatedQuery, useQuery } from "convex/react";
 import { AnimatePresence, motion } from "motion/react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
@@ -14,8 +13,8 @@ import {
   LuStar,
 } from "react-icons/lu";
 import { api } from "../../../convex/_generated/api";
-import CodeBlock from "../snippets/[id]/_components/CodeBlock";
 import SnippetCard from "../snippets/_components/SnippetCard";
+import ExecutionCard from "./_component/ExecutionCard";
 import ProfileHeader from "./_component/ProfileHeader";
 import ProfileHeaderSkeleton from "./_component/ProfileHeaderSkeleton";
 
@@ -132,73 +131,10 @@ const Profile = () => {
                 {activeTab === "executions" && (
                   <div className="space-y-6">
                     {executions?.map((execution) => (
-                      <div
+                      <ExecutionCard
                         key={execution._id}
-                        className="group rounded-xl overflow-hidden transition-all duration-300 border border-border hover:border-primary/50"
-                      >
-                        <div className="flex items-center justify-between p-4 bg-dark/30 rounded-t-xl border-b border-border/50">
-                          <div className="flex items-center gap-4">
-                            <div className="relative">
-                              <div className="absolute inset-0 bg-linear-to-r from-primary to-primary/80 rounded-lg blur opacity-20 group-hover:opacity-30 transition-opacity" />
-                              <Image
-                                src={"/images/" + execution.language + ".png"}
-                                alt={execution.language + " logo"}
-                                className="rounded-lg relative z-10 object-cover"
-                                width={40}
-                                height={40}
-                              />
-                            </div>
-                            <div className="space-y-1">
-                              <div className="flex items-center gap-2">
-                                <span className="text-sm font-medium text-light">
-                                  {execution.language.toUpperCase()}
-                                </span>
-                                <span className="text-xs text-light/50">•</span>
-                                <span className="text-xs text-light/50">
-                                  {new Date(
-                                    execution._creationTime
-                                  ).toLocaleString()}
-                                </span>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <span
-                                  className={`text-xs px-2 py-0.5 rounded-full ${
-                                    execution.error
-                                      ? "bg-red-500/10 text-red-400"
-                                      : "bg-green-500/10 text-green-400"
-                                  }`}
-                                >
-                                  {execution.error ? "Error" : "Success"}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="p-4 bg-dark/20">
-                          <CodeBlock
-                            code={execution.code}
-                            language={execution.language}
-                          />
-
-                          {(execution.output || execution.error) && (
-                            <div className="mt-4 p-4 rounded-lg bg-body/40">
-                              <h4 className="text-sm font-medium text-light/70 mb-2">
-                                Output
-                              </h4>
-                              <pre
-                                className={`text-sm ${
-                                  execution.error
-                                    ? "text-red-400"
-                                    : "text-green-600"
-                                }`}
-                              >
-                                {execution.error || execution.output}
-                              </pre>
-                            </div>
-                          )}
-                        </div>
-                      </div>
+                        execution={execution}
+                      />
                     ))}
 
                     {isExecutionLoading ? (
