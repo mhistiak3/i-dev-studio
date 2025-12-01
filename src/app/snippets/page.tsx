@@ -19,10 +19,10 @@ const SnippetsPage = () => {
   // loading state
   if (snippets === undefined) {
     return (
-      <>
+      <div className="container">
         <NavigationHeader />
         <SnippetsPageSkeleton />
-      </>
+      </div>
     );
   }
 

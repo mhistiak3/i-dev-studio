@@ -222,3 +222,29 @@ export const deleteComment = mutation({
     await ctx.db.delete(commentId);
   },
 });
+
+// starred snippet query
+export const getStarredSnippets = query({
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new ConvexError("User not authenticated");
+
+    const stars = await ctx.db
+      .query("stars")
+      .withIndex("byUserId")
+      .filter((q) => q.eq(q.field("userId"), identity.subject))
+      .collect();
+
+    const snippetIds = stars.map((star) => star.snippetId);
+
+    const snippets = [];
+    for (const snippetId of snippetIds) {
+      const snippet = await ctx.db.get(snippetId);
+      if (snippet) {
+        snippets.push(snippet);
+      }
+    }
+
+    return snippets.filter((snippet) => snippet !== null);
+  },
+});
