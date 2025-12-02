@@ -1,6 +1,5 @@
 "use client";
 import { motion } from "motion/react";
-import Image from "next/image";
 import {
   LuActivity,
   LuCode,
@@ -93,7 +92,7 @@ const ProfileHeader = ({
             className="absolute inset-0 bg-linear-to-r from-primary to-primary/80 rounded-full 
           blur-xl opacity-50 group-hover:opacity-75 transition-opacity"
           />
-          <Image
+          <img
             src={user.imageUrl}
             alt="Profile"
             width={96}
