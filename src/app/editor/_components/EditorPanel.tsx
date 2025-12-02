@@ -1,7 +1,7 @@
 "use client";
 import useMounted from "@/hooks/useMounted";
 import { useCodeEditorStore } from "@/store/useCodeEditorStore";
-import { useClerk } from "@clerk/nextjs";
+import { useClerk, useUser } from "@clerk/nextjs";
 import { Editor } from "@monaco-editor/react";
 import { motion } from "motion/react";
 import Image from "next/image";
@@ -13,6 +13,7 @@ import ShareSnippetDialog from "./ShareSnippetDialog";
 
 const EditorPanel = () => {
   const clerk = useClerk();
+  const { isSignedIn } = useUser();
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
   const { theme, language, fontSize, setFontSize, editor, setEditor } =
     useCodeEditorStore();
@@ -43,6 +44,15 @@ const EditorPanel = () => {
   const handleFontSizeChange = (newSize: number) => {
     const clampedSize = Math.min(24, Math.max(12, newSize));
     setFontSize(clampedSize);
+  };
+
+  const handleSnippetDialog = () => {
+    // check if user is signed in
+    if (!isSignedIn) {
+      clerk.openSignIn();
+      return;
+    }
+    setIsShareDialogOpen(true);
   };
 
   if (!mounted) return null;
@@ -102,7 +112,7 @@ const EditorPanel = () => {
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => setIsShareDialogOpen(true)}
+              onClick={handleSnippetDialog}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg overflow-hidden bg-linear-to-r from-primary to-primary/60 opacity-90 hover:opacity-100 transition-opacity"
             >
               <LuShare className="size-4 text-light" />

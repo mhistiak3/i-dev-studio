@@ -4,6 +4,7 @@ import { defineMonacoThemes, LANGUAGE_CONFIG } from "@/app/editor/_constants";
 import CopiedButton from "@/components/CopiedButton";
 import NavigationHeader from "@/components/NavigationHeader";
 import StarButton from "@/components/StarButton";
+import { useUser } from "@clerk/nextjs";
 import { Editor } from "@monaco-editor/react";
 import { useQuery } from "convex/react";
 import { useParams } from "next/navigation";
@@ -15,6 +16,7 @@ import SnippetLoadingSkeleton from "./_components/SnippetLoadingSkeleton";
 
 const SnippetDetails = () => {
   const { id } = useParams();
+  const { user } = useUser();
 
   const snippet = useQuery(api.snippets.getSnippetById, {
     snippetId: id as Id<"snippets">,
@@ -26,7 +28,6 @@ const SnippetDetails = () => {
   if (snippet === undefined) {
     return <SnippetLoadingSkeleton />;
   }
-  console.log(snippet);
 
   return (
     <div className="min-h-screen bg-dark">
@@ -82,7 +83,7 @@ const SnippetDetails = () => {
                 </div>
                 <div className="flex gap-x-3">
                   <CopiedButton content={snippet.code} />
-                  <StarButton snippetId={snippet._id} />
+                  {user && <StarButton snippetId={snippet._id} />}
                 </div>
               </div>
               <Editor

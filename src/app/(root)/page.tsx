@@ -1,6 +1,6 @@
+import CTASection from "@/components/CTASection";
 import NavigationHeader from "@/components/NavigationHeader";
 import AboutSection from "./_components/AboutSection";
-import CTASection from "./_components/CTASection";
 import FeaturesSection from "./_components/FeaturesSection";
 import HeroSection from "./_components/HeroSection";
 import LanguagesSection from "./_components/LanguagesSection";
