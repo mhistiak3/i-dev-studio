@@ -3,6 +3,7 @@ import NavigateLink from "@/components/NavigateLink";
 import { SignedIn } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
 import { ConvexHttpClient } from "convex/browser";
+import { LuFileCode } from "react-icons/lu";
 import HeaderProfile from "./HeaderProfile";
 import LanguageSelector from "./LanguageSelector";
 import RunButton from "./RunButton";
@@ -18,7 +19,7 @@ const Header = async () => {
         <Logo />
         {/* Navigation */}
         <nav className="hidden lg:flex items-center space-x-1">
-          <NavigateLink href="/snippets" label="Snippets" />
+          <NavigateLink href="/snippets" label="Snippets" Icon={LuFileCode} />
         </nav>
       </div>
       <div className="flex items-center gap-4">

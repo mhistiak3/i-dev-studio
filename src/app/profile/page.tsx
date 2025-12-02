@@ -4,7 +4,7 @@ import { useUser } from "@clerk/nextjs";
 import { usePaginatedQuery, useQuery } from "convex/react";
 import { AnimatePresence, motion } from "motion/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   LuChevronRight,
   LuCode,
@@ -36,9 +36,10 @@ const Profile = () => {
   const [activeTab, setActiveTab] = useState<"executions" | "starred">(
     "executions"
   );
+  const [previousExecutionCount, setPreviousExecutionCount] = useState(0);
 
-  const starredSnippet = useQuery(api.snippets.getStarredSnippets);
-  const userState = useQuery(api.codeExecutions.getUserStats, {
+  const starredSnippets = useQuery(api.snippets.getStarredSnippets);
+  const userStats = useQuery(api.codeExecutions.getUserStats, {
     userId: user?.id || "",
   });
   const {
@@ -56,6 +57,29 @@ const Profile = () => {
 
   const userData = useQuery(api.users.getUser, { userId: user?.id || "" });
 
+  // Auto-load more when executions are deleted to maintain view consistency
+  useEffect(() => {
+    if (executions && executions.length > 0) {
+      // If items were deleted and we can load more, automatically load to fill the gap
+      if (
+        previousExecutionCount > 0 &&
+        executions.length < previousExecutionCount &&
+        executionsStatus === "CanLoadMore" &&
+        !isExecutionLoading
+      ) {
+        const deletedCount = previousExecutionCount - executions.length;
+        loadMore(deletedCount);
+      }
+      setPreviousExecutionCount(executions.length);
+    }
+  }, [
+    executions,
+    previousExecutionCount,
+    executionsStatus,
+    isExecutionLoading,
+    loadMore,
+  ]);
+
   // /handlers
   const handleLoadMore = () => {
     if (executionsStatus === "CanLoadMore") loadMore(5);
@@ -72,14 +96,15 @@ const Profile = () => {
         <NavigationHeader />
         <div className="max-w-7xl mx-auto px-4 py-12">
           {/* Header */}
-          {userData && userState && (
+          {userData && userStats && (
             <ProfileHeader
               userData={userData}
-              userState={userState}
+              userStats={userStats}
               user={user}
+              starredSnippets={starredSnippets}
             />
           )}
-          {(userState === undefined || !isLoaded) && <ProfileHeaderSkeleton />}
+          {(userStats === undefined || !isLoaded) && <ProfileHeaderSkeleton />}
 
           {/* content */}
           <div className="bg-linear-to-br from-dark to-dark/80 rounded-3xl shadow-2xl shadow-black/50 border border-border/50 backdrop-blur-xl overflow-hidden">
@@ -177,11 +202,11 @@ const Profile = () => {
                 {/* ACTIVE TAB IS STARS: */}
                 {activeTab === "starred" && (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {starredSnippet?.map((snippet) => (
+                    {starredSnippets?.map((snippet) => (
                       <SnippetCard snippet={snippet} key={snippet._id} />
                     ))}
 
-                    {(!starredSnippet || starredSnippet.length === 0) && (
+                    {(!starredSnippets || starredSnippets.length === 0) && (
                       <div className="col-span-full text-center py-12">
                         <LuStar className="w-12 h-12 text-light/30 mx-auto mb-4" />
                         <h3 className="text-lg font-medium text-light/70 mb-2">

@@ -34,6 +34,7 @@ export const getUserCodeExecutions = query({
     return await ctx.db
       .query("codeExecutions")
       .withIndex("byUserId")
+      .order("desc")
       .filter((q) => q.eq(q.field("userId"), args.userId))
       .paginate(args.paginationOpts);
   },

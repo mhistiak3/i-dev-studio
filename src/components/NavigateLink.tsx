@@ -1,7 +1,14 @@
 import Link from "next/link";
-import { LuFileCode2 } from "react-icons/lu";
 
-const NavigateLink = ({ href, label }: { href: string; label: string }) => {
+const NavigateLink = ({
+  href,
+  label,
+  Icon,
+}: {
+  href: string;
+  label: string;
+  Icon: React.ComponentType<{ className?: string }>;
+}) => {
   return (
     <Link
       href={href}
@@ -12,7 +19,7 @@ const NavigateLink = ({ href, label }: { href: string; label: string }) => {
         className="absolute inset-0 bg-linear-to-r from-primary/10 
               to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"
       />
-      <LuFileCode2 className="w-4 h-4 relative z-10 group-hover:rotate-3 transition-transform hidden sm:block" />
+      <Icon className="w-4 h-4 relative z-10 group-hover:rotate-3 transition-transform hidden sm:block" />
       <span className="text-sm font-medium relative z-10 group-hover:text-light transition-colors">
         {label}
       </span>
