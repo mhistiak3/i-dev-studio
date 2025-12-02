@@ -1,16 +1,20 @@
 import NavigationHeader from "@/components/NavigationHeader";
+import AboutSection from "./_components/AboutSection";
+import CTASection from "./_components/CTASection";
+import FeaturesSection from "./_components/FeaturesSection";
+import HeroSection from "./_components/HeroSection";
+import LanguagesSection from "./_components/LanguagesSection";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-body/20">
+    <div className="min-h-screen bg-body/20 flex flex-col">
       <div className="container">
         <NavigationHeader />
-        <div className="text-center mt-20">
-          <h1 className="text-3xl font-bold mt-8">Welcome to iDevStudio</h1>
-          <p className="mt-4 text-lg text-light/80">
-            Your online code editing platform.
-          </p>
-        </div>
+        <HeroSection />
+        <LanguagesSection />
+        <FeaturesSection />
+        <AboutSection />
+        <CTASection />
       </div>
     </div>
   );
