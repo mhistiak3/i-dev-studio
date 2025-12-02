@@ -34,11 +34,13 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
     executionResult: null,
 
     // actions
-    getCode: () => get().editor?.getValue() || "",
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Monaco editor instance requires any for getValue method
+    getCode: () => (get().editor as any)?.getValue() || "",
     setEditor: (editor) => {
       const savedCode = localStorage.getItem(`editor-code-${get().language}`);
 
-      if (savedCode) editor.setValue(savedCode);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Monaco editor instance requires any for setValue method
+      if (savedCode) (editor as any).setValue(savedCode);
       set({ editor });
     },
     setTheme: (theme: string) => {
@@ -50,7 +52,8 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
       set({ fontSize });
     },
     setLanguage: (language: string) => {
-      const currentLanguageCode = get().editor?.getValue() || "";
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Monaco editor instance requires any for getValue method
+      const currentLanguageCode = (get().editor as any)?.getValue() || "";
       if (currentLanguageCode) {
         localStorage.setItem(
           `editor-code-${get().language}`,
@@ -125,7 +128,8 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
           output: output.trim(),
           executionResult: { code, output: output.trim(), error: null },
         });
-      } catch (error) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Runtime error handling requires any type
+      } catch (error: any) {
         console.log(error);
 
         set({

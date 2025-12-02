@@ -43,10 +43,10 @@ export interface CodeEditorState {
   error: string | null;
   theme: string;
   fontSize: number;
-  editor: any | null;
+  editor: unknown | null;
   executionResult: ExecutionResult | null;
 
-  setEditor: (editor: any) => void;
+  setEditor: (editor: unknown) => void;
   getCode: () => string;
   setLanguage: (language: string) => void;
   setTheme: (theme: string) => void;

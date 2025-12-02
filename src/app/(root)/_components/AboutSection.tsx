@@ -40,8 +40,8 @@ const AboutSection = () => {
                 <p className="text-lg text-light/70 mb-6 leading-relaxed">
                   iDevStudio is a modern online code editor designed for
                   developers who value speed, simplicity, and power. Whether
-                  you're learning to code, prototyping ideas, or sharing
-                  solutions with your team, we've got you covered.
+                  you&apos;re learning to code, prototyping ideas, or sharing
+                  solutions with your team, we&apos;ve got you covered.
                 </p>
                 <ul className="space-y-4">
                   {BENEFITS.map((item, i) => (

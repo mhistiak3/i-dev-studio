@@ -5,6 +5,7 @@ import CTASection from "@/components/CTASection";
 import NavigationHeader from "@/components/NavigationHeader";
 import { useQuery } from "convex/react";
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import { useState } from "react";
 import {
   LuBookOpen,
@@ -130,9 +131,11 @@ const SnippetsPage = () => {
                   `}
                 >
                   <div className="flex items-center gap-2">
-                    <img
+                    <Image
                       src={`/images/${lang}.png`}
                       alt={lang}
+                      width={16}
+                      height={16}
                       className="w-4 h-4 object-contain"
                     />
                     <span className="text-sm">{lang}</span>
@@ -208,7 +211,7 @@ const SnippetsPage = () => {
                   No snippets found
                 </h3>
                 <p className="text-light/50 mb-4">
-                  Try adjusting your search or filter to find what you're
+                  Try adjusting your search or filter to find what you&apos;re
                   looking for.
                 </p>
                 {(searchQuery || selectedLanguage) && (

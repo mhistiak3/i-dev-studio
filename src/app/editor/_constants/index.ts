@@ -446,6 +446,7 @@ export const THEME_DEFINITIONS = {
 };
 
 // Helper function to define themes in Monaco
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Monaco editor instance requires any type for dynamic theme API
 export const defineMonacoThemes = (monaco: any) => {
   Object.entries(THEME_DEFINITIONS).forEach(([themeName, themeData]) => {
     monaco.editor.defineTheme(themeName, {

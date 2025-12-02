@@ -7,6 +7,7 @@ import StarButton from "@/components/StarButton";
 import { useUser } from "@clerk/nextjs";
 import { Editor } from "@monaco-editor/react";
 import { useQuery } from "convex/react";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import { LuClock, LuCode, LuMessageSquare, LuUser } from "react-icons/lu";
 import { api } from "../../../../convex/_generated/api";
@@ -40,9 +41,11 @@ const SnippetDetails = () => {
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 ">
                 <div className="flex items-center gap-4">
                   <div className="flex items-center justify-center size-14 rounded-xl bg-light/5 p-2.5">
-                    <img
+                    <Image
                       src={`/images/${snippet.language}.png`}
                       alt={`${snippet.language} logo`}
+                      width={56}
+                      height={56}
                       className="w-full h-full object-contain"
                     />
                   </div>

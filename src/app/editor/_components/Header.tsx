@@ -1,8 +1,6 @@
 import Logo from "@/components/Logo";
 import NavigateLink from "@/components/NavigateLink";
 import { SignedIn } from "@clerk/nextjs";
-import { currentUser } from "@clerk/nextjs/server";
-import { ConvexHttpClient } from "convex/browser";
 import { LuFileCode } from "react-icons/lu";
 import HeaderProfile from "./HeaderProfile";
 import LanguageSelector from "./LanguageSelector";
@@ -10,9 +8,6 @@ import RunButton from "./RunButton";
 import ThemeSelector from "./ThemeSelector";
 
 const Header = async () => {
-  const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
-  const user = await currentUser();
-
   return (
     <header>
       <div className="flex items-center gap-8">

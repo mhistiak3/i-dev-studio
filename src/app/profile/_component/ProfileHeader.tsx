@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "motion/react";
+import Image from "next/image";
 import {
   LuActivity,
   LuCode,
@@ -11,6 +12,7 @@ import {
 } from "react-icons/lu";
 import { Id } from "../../../../convex/_generated/dataModel";
 interface ProfileHeaderProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Clerk UserResource type requires any for dynamic properties
   user: any;
   userStats: {
     totalExecutions: number;
@@ -28,6 +30,7 @@ interface ProfileHeaderProps {
     email: string;
     name: string;
   };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Explanation why any is needed
   starredSnippets: any;
 }
 const ProfileHeader = ({
@@ -90,9 +93,11 @@ const ProfileHeader = ({
             className="absolute inset-0 bg-linear-to-r from-primary to-primary/80 rounded-full 
           blur-xl opacity-50 group-hover:opacity-75 transition-opacity"
           />
-          <img
+          <Image
             src={user.imageUrl}
             alt="Profile"
+            width={96}
+            height={96}
             className="w-24 h-24 rounded-full border-4 border-border/50 relative z-10 group-hover:scale-105 transition-transform"
           />
         </div>

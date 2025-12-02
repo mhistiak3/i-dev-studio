@@ -21,19 +21,31 @@ const EditorPanel = () => {
   useEffect(() => {
     const savedCode = localStorage.getItem(`editor-code-${language}`);
     const newCode = savedCode || LANGUAGE_CONFIG[language].defaultCode;
-    if (editor) editor.setValue(newCode);
+    if (
+      editor &&
+      typeof (editor as { setValue?: (value: string) => void }).setValue ===
+        "function"
+    ) {
+      (editor as { setValue: (value: string) => void }).setValue(newCode);
+    }
   }, [language, editor]);
 
   // font
   useEffect(() => {
     const savedFontSize = localStorage.getItem("editor-font-size");
     if (savedFontSize) setFontSize(parseInt(savedFontSize));
-  }, []);
+  }, [setFontSize]);
 
   // handler
   const handleRefresh = () => {
     const defaultCode = LANGUAGE_CONFIG[language].defaultCode;
-    if (editor) editor.setValue(defaultCode);
+    if (
+      editor &&
+      typeof (editor as { setValue?: (value: string) => void }).setValue ===
+        "function"
+    ) {
+      (editor as { setValue: (value: string) => void }).setValue(defaultCode);
+    }
     localStorage.setItem(`editor-code-${language}`, defaultCode);
   };
   const handleEditorChange = (value: string | undefined) => {

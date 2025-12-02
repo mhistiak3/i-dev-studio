@@ -1,6 +1,5 @@
 import CodeBlock from "@/app/snippets/[id]/_components/CodeBlock";
 import DeleteButton from "@/components/DeleteButton";
-import { useUser } from "@clerk/nextjs";
 import { useMutation } from "convex/react";
 import { motion } from "motion/react";
 import Image from "next/image";
@@ -19,7 +18,6 @@ interface ExecutionProps {
   };
 }
 const ExecutionCard = ({ execution }: ExecutionProps) => {
-  const { user } = useUser();
   const [isDeleting, setIsDeleting] = useState(false);
   const deleteExecution = useMutation(
     api.codeExecutions.deleteCodeExecutionById
