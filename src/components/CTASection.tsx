@@ -37,7 +37,7 @@ const CTASection = () => {
                   className="inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-primary to-primary/80 rounded-xl text-light font-semibold shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all"
                 >
                   <LuRocket className="w-5 h-5" />
-                  Launch Editor
+                  Start Coding Now
                   <LuArrowRight className="w-5 h-5" />
                 </motion.button>
               </Link>

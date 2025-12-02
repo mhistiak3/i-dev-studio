@@ -6,7 +6,14 @@ import NavigationHeader from "@/components/NavigationHeader";
 import { useQuery } from "convex/react";
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
-import { LuBookOpen, LuLayers, LuSearch, LuTag, LuX } from "react-icons/lu";
+import {
+  LuBookOpen,
+  LuCode,
+  LuLayers,
+  LuSearch,
+  LuTag,
+  LuX,
+} from "react-icons/lu";
 import { TbLayoutGrid } from "react-icons/tb";
 import { api } from "../../../convex/_generated/api";
 import SnippetCard from "./_components/SnippetCard";
@@ -191,6 +198,33 @@ const SnippetsPage = () => {
                 ))}
               </AnimatePresence>
             </motion.div>
+
+            {/* Handle Empty State */}
+
+            {filteredSnippets.length === 0 && (
+              <motion.div className="text-center py-12">
+                <LuCode className="w-12 h-12 text-light/30 mx-auto mb-4" />
+                <h3 className="text-lg font-medium text-light/70 mb-2">
+                  No snippets found
+                </h3>
+                <p className="text-light/50 mb-4">
+                  Try adjusting your search or filter to find what you're
+                  looking for.
+                </p>
+                {(searchQuery || selectedLanguage) && (
+                  <button
+                    onClick={() => {
+                      setSearchQuery("");
+                      setSelectedLanguage(null);
+                    }}
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-all duration-200 ring-1 ring-primary/30"
+                  >
+                    <LuX className="w-4 h-4" />
+                    Clear All Filters
+                  </button>
+                )}
+              </motion.div>
+            )}
           </div>
         </main>
 
