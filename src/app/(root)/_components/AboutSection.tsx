@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { LuCode } from "react-icons/lu";
+import Image from "next/image";
 
 const BENEFITS = [
   "No installation required - start coding instantly",
@@ -26,8 +26,8 @@ const AboutSection = () => {
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/3 rounded-full blur-3xl" />
 
-          <div className="relative grid md:grid-cols-2 gap-12 items-center">
-            <div>
+          <div className="relative grid xl:grid-cols-5 gap-12 items-center">
+            <div className="xl:col-span-2">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -63,22 +63,15 @@ const AboutSection = () => {
               </motion.div>
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="relative"
-            >
-              <div className="aspect-square rounded-2xl bg-linear-to-br from-primary/10 to-primary/5 border border-primary/20 p-8 flex items-center justify-center">
-                <div className="text-center">
-                  <LuCode className="w-24 h-24 text-primary mx-auto mb-4" />
-                  <p className="text-light/60 text-sm">
-                    Powered by Monaco Editor
-                  </p>
-                </div>
-              </div>
-            </motion.div>
+            <div className="xl:col-span-3">
+              <Image
+                src="/monaco-editor.png"
+                alt="Monaco Editor"
+                width={1300}
+                height={1000}
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         </motion.div>
       </div>

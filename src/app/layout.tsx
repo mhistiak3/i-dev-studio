@@ -25,6 +25,8 @@ export default function RootLayout({
     <ClerkProvider>
       <head>
         <link rel="icon" href="/favicon.png" />
+        <meta property="og:image" content="/og-image.png" />
+        <meta property="og:type" content="website" />
       </head>
       <html lang="en">
         <body className={`${geistSans.variable} antialiased`}>

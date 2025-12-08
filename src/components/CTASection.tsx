@@ -10,13 +10,13 @@ const CTASection = () => {
 
   return (
     <section className="section">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="sm:max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="relative bg-linear-to-br from-primary/10 to-primary/5 rounded-3xl p-12 text-center border border-primary/20 overflow-hidden"
+          className="relative bg-linear-to-br from-primary/10 to-primary/5 rounded-3xl p-6 sm:p-12 text-center border border-primary/20 overflow-hidden"
         >
           <div className="absolute inset-0 bg-grid-white/[0.02] bg-size-[32px]" />
 

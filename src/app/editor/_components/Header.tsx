@@ -27,7 +27,7 @@ const Header = async () => {
         <SignedIn>
           <RunButton />
         </SignedIn>
-        <div className="pl-3 border-l border-gray-800">
+        <div className="pl-3 sm:border-l sm:border-gray-800">
           <HeaderProfile />
         </div>
       </div>

@@ -56,7 +56,7 @@ const ThemeSelector = () => {
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         onClick={() => setIsOpen(!isOpen)}
-        className={`group relative flex items-center gap-3 px-4 py-2.5 bg-dark/80 
+        className={`group relative flex items-center gap-3 px-3 sm:px-4 py-2.5 bg-dark/80 
       rounded-lg transition-all 
        duration-200 border border-body/50 hover:border-border/70
       `}
@@ -76,7 +76,7 @@ const ThemeSelector = () => {
           style={{ backgroundColor: currentTheme?.color }}
         />
         <LuChevronDown
-          className={`size-4 text-light/60 group-hover:text-light transition-all duration-300
+          className={`hidden sm:inline-block size-4 text-light/60 group-hover:text-light transition-all duration-300
             ${isOpen ? "rotate-180" : ""}`}
         />
       </motion.button>
