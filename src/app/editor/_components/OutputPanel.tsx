@@ -2,6 +2,7 @@
 
 import CopiedButton from "@/components/CopiedButton";
 import { useCodeEditorStore } from "@/store/useCodeEditorStore";
+import { useUser } from "@clerk/nextjs";
 import {
   LuCheckCheck,
   LuClock,
@@ -11,7 +12,13 @@ import {
 import RunningCodeSkeleton from "./RunningCodeSkeleton";
 
 const OutputPanel = () => {
-  const { output, error, isRunning } = useCodeEditorStore();
+  const { output, error, isRunning, runCode } = useCodeEditorStore();
+
+  const user = useUser();
+
+  async function handleRunCode() {
+    await runCode();
+  }
   return (
     <div className="relative bg-dark/90 backdrop-blur rounded-xl border border-border/5 p-4">
       {/* Header */}
@@ -23,6 +30,15 @@ const OutputPanel = () => {
           <span className="text-sm font-medium text-light">Output</span>
         </div>
 
+        {!user.isSignedIn && (
+          <button
+            disabled={isRunning}
+            onClick={handleRunCode}
+            className="text-xs border border-border py-1 px-2 rounded-md cursor-pointer text-light/80 hover:text-light hover:bg-dark/50 transition-colors"
+          >
+            Run Code
+          </button>
+        )}
         <CopiedButton content={error || output} />
       </div>
 
