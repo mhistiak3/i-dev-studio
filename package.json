@@ -14,7 +14,7 @@
     "@monaco-editor/react": "^4.7.0",
     "convex": "^1.28.2",
     "motion": "^12.23.24",
-    "next": "15.5.7",
+    "next": "15.5.9",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-hot-toast": "^2.6.0",
