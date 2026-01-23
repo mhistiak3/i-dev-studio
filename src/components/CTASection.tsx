@@ -3,7 +3,7 @@
 import { SignInButton, useUser } from "@clerk/nextjs";
 import { motion } from "motion/react";
 import Link from "next/link";
-import { LuArrowRight, LuRocket } from "react-icons/lu";
+import EditorButton from "./EditorButton";
 
 const CTASection = () => {
   const { isSignedIn } = useUser();
@@ -31,27 +31,11 @@ const CTASection = () => {
 
             {isSignedIn ? (
               <Link href="/editor">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-primary to-primary/80 rounded-xl text-light font-semibold shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all"
-                >
-                  <LuRocket className="w-5 h-5" />
-                  Start Coding Now
-                  <LuArrowRight className="w-5 h-5" />
-                </motion.button>
+                <EditorButton>Start Coding Now</EditorButton>
               </Link>
             ) : (
               <SignInButton mode="modal">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-primary to-primary/80 rounded-xl text-light font-semibold shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all"
-                >
-                  <LuRocket className="w-5 h-5" />
-                  Get Started Free
-                  <LuArrowRight className="w-5 h-5" />
-                </motion.button>
+                <EditorButton>Get Started Free</EditorButton>
               </SignInButton>
             )}
           </div>
