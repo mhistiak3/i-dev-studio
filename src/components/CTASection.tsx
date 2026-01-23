@@ -35,7 +35,7 @@ const CTASection = () => {
               </Link>
             ) : (
               <SignInButton mode="modal">
-                <EditorButton>Get Started Free</EditorButton>
+                <EditorButton>Get Started Free </EditorButton>
               </SignInButton>
             )}
           </div>
