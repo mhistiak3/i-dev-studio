@@ -82,7 +82,6 @@ const FeaturesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -8 }}
               className="group relative bg-dark/40 backdrop-blur-sm rounded-2xl p-6 border border-border/50 hover:border-primary/50 transition-all overflow-hidden"
             >
               {/* Glow Effect */}

@@ -47,7 +47,7 @@ const LanguagesSection = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ scale: 1.1, y: -5 }}
+              whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}
               className="group relative flex flex-col items-center gap-3 p-4 rounded-xl bg-dark/40 border border-border/50 hover:border-primary/50 hover:bg-dark/60 transition-all cursor-pointer"
             >
               <div className="relative">
